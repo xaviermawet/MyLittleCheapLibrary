@@ -9,7 +9,8 @@ package SPF;
 public interface Chiffrement 
 {
     void init(Cle k);
-    void crypte(String plainText);
-    void decrypte(String cipherText);
+    Cle genererCle(int longueur);
+    String crypte(String plainText);
+    String decrypte(String cipherText);
     String getProvider();
 }

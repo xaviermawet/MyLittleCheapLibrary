@@ -12,11 +12,7 @@ public class AlbertiFamily implements CryptoProvider
     @Override
     public Chiffrement newChiffrement() 
     {
-        ChiffrePoly chiffrement = new ChiffrePoly();
-        
-        // TODO : le configurer avec la clé
-        
-        return chiffrement;
+        return new ChiffrePoly();
     }
     
 }
