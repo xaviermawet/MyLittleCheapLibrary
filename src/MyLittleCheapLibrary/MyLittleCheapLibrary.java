@@ -14,16 +14,13 @@ public class MyLittleCheapLibrary
     {
         /* Alberti */
         Chiffrement chiffrement = CryptoManager.getChiffrement("AlbertiFamily");
-        System.out.println("Chiffrement récupéré : " + chiffrement.toString());
-        
         Cle cle = chiffrement.genererCle(5);
-        System.out.println(cle);
         
         chiffrement.init(cle);
-        String msg = "ca marche";
-        System.out.println("Message clair : " + msg);
+        String msg = "Hello World";
+        System.out.println("Message clair    : " + msg);
         msg = chiffrement.crypte(msg);
-        System.out.println("Message crypté : " + msg);
+        System.out.println("Message crypté   : " + msg);
         msg = chiffrement.decrypte(msg);
         System.out.println("Message décrypté : " + msg);
         
@@ -31,17 +28,14 @@ public class MyLittleCheapLibrary
         
         /* Cesar */
         chiffrement = CryptoManager.getChiffrement("Triumvirat");
-        System.out.println("Chiffrement récupéré : " + chiffrement.toString());
-        
-        cle = chiffrement.genererCle(3); // génère une clé composée de 3 chiffres % 127
-        System.out.println(cle);
+        cle = chiffrement.genererCle(3);
         
         chiffrement.init(cle);
-        msg = "Hello";
-        System.out.println("Clair : " + msg);
+        msg = "Hello World";
+        System.out.println("Message clair    : " + msg);
         msg = chiffrement.crypte(msg);
-        System.out.println("crypté : " + msg);
+        System.out.println("Message crypté   : " + msg);
         msg = chiffrement.decrypte(msg);
-        System.out.println("décrypté : " + msg);
+        System.out.println("Message décrypté : " + msg);
     }
 }

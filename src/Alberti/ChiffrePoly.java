@@ -10,6 +10,12 @@ import java.util.Random;
  */
 public class ChiffrePoly implements Chiffrement
 {
+
+    public ChiffrePoly()
+    {
+        this.ringLen = largeRing.length();
+    }
+    
     @Override
     public void init(Cle k) 
     {
@@ -26,6 +32,9 @@ public class ChiffrePoly implements Chiffrement
             throw new IllegalArgumentException("Clé non valide : lettre de calage inexistante");
 
         this.key = cle;
+        this.indiceBindingLetterSmallRing = this.smallRing.indexOf(
+                key.getSmallRingLetter());
+        this.periode = this.key.getPeriodLength();
     }
     
     @Override
@@ -56,35 +65,35 @@ public class ChiffrePoly implements Chiffrement
         
         String UCPlainText = plainText.toUpperCase();
         final int plainTextLen = plainText.length();
-        final int ringLen = largeRing.length();
         
-        System.out.println("Taille texte a crypter : " + plainTextLen);
-        
-        // utiliser le décalage d'indice entre les deux lettre callée + modulo la longueur des texts
-        // Avec largeRing.length() pour si on veut pouvoir rajouter des lettres dans la roue
-        
-        int indiceSmallRing = this.smallRing.indexOf(key.getSmallRingLetter());
-        int indiceLargeRing = this.largeRing.indexOf(key.getKey().charAt(0));
-        
-        int decalage = indiceSmallRing - indiceLargeRing;
-        System.out.println("Décalage brut : " + decalage);
-        if (decalage < 0)
-            decalage += ringLen;
-        
-        System.out.println("decalage corrigé = " + decalage);
+        int decalage  = -1;
+        int indiceKey = -1;
         
         char[] cipherText = new char[plainTextLen];
         for (int i = 0; i < plainTextLen; ++i)
         {
-            char lettreACrypter = UCPlainText.charAt(i);
-            int indiceLettreCryptee = (decalage + largeRing.indexOf(lettreACrypter)) % ringLen;
+            /* Choisir la lettre de référence du disque exterieur 
+             * que l'on cale sur celle du disque intérieur */
+            if (i % this.periode == 0)
+            {   
+                indiceKey = (indiceKey + 1) % this.key.getLongueur();
+                int indiceBindingLetterLargeRing = this.largeRing.indexOf(
+                        key.getKey().charAt(indiceKey));
+        
+                decalage = indiceBindingLetterSmallRing - 
+                           indiceBindingLetterLargeRing;
+                if (decalage < 0)
+                    decalage += ringLen;
+            }
+            
+            /* L'indice de la lettre cryptée = 
+             * décalage + indice de la lettre non cryptée  */
+            int indiceLettreCryptee = (decalage + largeRing.indexOf(
+                    UCPlainText.charAt(i))) % ringLen;
             
             if (indiceLettreCryptee < 0)
                 indiceLettreCryptee += ringLen;
             
-            System.out.println("Lettre a crypter : " + lettreACrypter);
-            System.out.println("Indice lettre a crypter : " + largeRing.indexOf(lettreACrypter));
-            System.out.println("Indice lettre cryptée   : " + indiceLettreCryptee);
             cipherText[i] = this.smallRing.charAt(indiceLettreCryptee);
         }
         
@@ -98,33 +107,35 @@ public class ChiffrePoly implements Chiffrement
             throw new IllegalStateException("Chiffrement non initialisé");
         
         final int cipherTextLen = cipherText.length();
-        final int ringLen = largeRing.length();
         
-        System.out.println("Taille texte a décrypter : " + cipherTextLen);
-        
-        int indiceSmallRing = this.smallRing.indexOf(key.getSmallRingLetter());
-        int indiceLargeRing = this.largeRing.indexOf(key.getKey().charAt(0));
-        
-        int decalage = indiceSmallRing - indiceLargeRing;
-        System.out.println("Décalage brut : " + decalage);
-        if (decalage < 0)
-            decalage += ringLen;
-        
-        System.out.println("decalage corrigé = " + decalage);
+        int decalage  = -1;
+        int indiceKey = -1;
         
         char[] plainText = new char[cipherTextLen];
         for (int i = 0; i < cipherTextLen; ++i)
         {
-            char lettreADecrypter = cipherText.charAt(i);
-            int indiceLettreADecrypter = smallRing.indexOf(lettreADecrypter);
-            int indiceLettreDecryptee = (-decalage + indiceLettreADecrypter) % ringLen;
+            /* Choisir la lettre de référence du disque exterieur 
+             * que l'on cale sur celle du disque intérieur */
+            if (i % periode == 0)
+            {   
+                indiceKey = (indiceKey + 1) % this.key.getLongueur();
+                
+                int indiceBindingLetterLargeRing = this.largeRing.indexOf(
+                        key.getKey().charAt(indiceKey));
+        
+                decalage = indiceBindingLetterSmallRing - 
+                           indiceBindingLetterLargeRing;
+                if (decalage < 0)
+                    decalage += ringLen;
+            }
+            
+            /* L'indice de la lettre decryptée = 
+             * indice de la lettre cryptée - décalage */
+            int indiceLettreDecryptee = (smallRing.indexOf(cipherText.charAt(i))
+                    - decalage) % ringLen;
             
             if (indiceLettreDecryptee < 0)
                 indiceLettreDecryptee += ringLen;
-            
-            System.out.println("Lettre a decrypter : " + lettreADecrypter);
-            System.out.println("Indice lettre a decrypter : " + indiceLettreADecrypter);
-            System.out.println("Indice lettre decryptée : " + indiceLettreDecryptee);
             
             plainText[i] = this.largeRing.charAt(indiceLettreDecryptee);
         }
@@ -139,10 +150,24 @@ public class ChiffrePoly implements Chiffrement
         return null;
     }
     
+    // Indépendant de la clé
+    
     // Alphabet clair
     private final String largeRing = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
     // Alphabet crypté
-    private final String smallRing = "c&bm+dgpf!zn=xyvto)sk,erl<ha*iqc-juw(";
+    private final String smallRing = "c&bm+dgpf!zn=xyvto)sk,erl<ha*iq1-juw(";
+    // Taille des disques
+    private final int ringLen;
+    
+    // Dépendant de la clé
+    
     // Clé utilisée pour chiffrer et/ou déchiffrer
     private CleAlberti key = null;
+    
+    /* Indice du disque interne de la lettre de référence
+     * sur laquelle on cale le disque extérieur */
+    private int indiceBindingLetterSmallRing;
+    
+    // Période durant laquelle on crypte avant de tourner le disque
+    private int periode;
 }
