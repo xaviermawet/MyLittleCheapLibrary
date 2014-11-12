@@ -53,12 +53,42 @@ public class ChiffrePoly implements Chiffrement
     {
         if (this.key == null)
             throw new IllegalStateException("Chiffrement non initialisé");
-        // TODO
+        
+        String UCPlainText = plainText.toUpperCase();
+        final int plainTextLen = plainText.length();
+        final int ringLen = largeRing.length();
+        
+        System.out.println("Taille texte a crypter : " + plainTextLen);
         
         // utiliser le décalage d'indice entre les deux lettre callée + modulo la longueur des texts
         // Avec largeRing.length() pour si on veut pouvoir rajouter des lettres dans la roue
         
-        return null;
+        int indiceSmallRing = this.smallRing.indexOf(key.getSmallRingLetter());
+        int indiceLargeRing = this.largeRing.indexOf(key.getKey().charAt(0));
+        
+        int decalage = indiceSmallRing - indiceLargeRing;
+        System.out.println("Décalage brut : " + decalage);
+        if (decalage < 0)
+            decalage += ringLen;
+        
+        System.out.println("decalage corrigé = " + decalage);
+        
+        char[] cipherText = new char[plainTextLen];
+        for (int i = 0; i < plainTextLen; ++i)
+        {
+            char lettreACrypter = UCPlainText.charAt(i);
+            int indiceLettreCryptee = (decalage + largeRing.indexOf(lettreACrypter)) % ringLen;
+            
+            if (indiceLettreCryptee < 0)
+                indiceLettreCryptee += ringLen;
+            
+            System.out.println("Lettre a crypter : " + lettreACrypter);
+            System.out.println("Indice lettre a crypter : " + largeRing.indexOf(lettreACrypter));
+            System.out.println("Indice lettre cryptée   : " + indiceLettreCryptee);
+            cipherText[i] = this.smallRing.charAt(indiceLettreCryptee);
+        }
+        
+        return new String(cipherText);
     }
 
     @Override
@@ -67,9 +97,39 @@ public class ChiffrePoly implements Chiffrement
         if (this.key == null)
             throw new IllegalStateException("Chiffrement non initialisé");
         
-        // TODO
+        final int cipherTextLen = cipherText.length();
+        final int ringLen = largeRing.length();
         
-        return null;
+        System.out.println("Taille texte a décrypter : " + cipherTextLen);
+        
+        int indiceSmallRing = this.smallRing.indexOf(key.getSmallRingLetter());
+        int indiceLargeRing = this.largeRing.indexOf(key.getKey().charAt(0));
+        
+        int decalage = indiceSmallRing - indiceLargeRing;
+        System.out.println("Décalage brut : " + decalage);
+        if (decalage < 0)
+            decalage += ringLen;
+        
+        System.out.println("decalage corrigé = " + decalage);
+        
+        char[] plainText = new char[cipherTextLen];
+        for (int i = 0; i < cipherTextLen; ++i)
+        {
+            char lettreADecrypter = cipherText.charAt(i);
+            int indiceLettreADecrypter = smallRing.indexOf(lettreADecrypter);
+            int indiceLettreDecryptee = (-decalage + indiceLettreADecrypter) % ringLen;
+            
+            if (indiceLettreDecryptee < 0)
+                indiceLettreDecryptee += ringLen;
+            
+            System.out.println("Lettre a decrypter : " + lettreADecrypter);
+            System.out.println("Indice lettre a decrypter : " + indiceLettreADecrypter);
+            System.out.println("Indice lettre decryptée : " + indiceLettreDecryptee);
+            
+            plainText[i] = this.largeRing.charAt(indiceLettreDecryptee);
+        }
+        
+        return new String(plainText);
     }
 
     @Override
