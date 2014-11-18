@@ -9,13 +9,17 @@ import SPF.CryptoProvider;
  */
 public class Triumvirat implements CryptoProvider
 {
+    // <editor-fold defaultstate="collapsed" desc="Constructeur">
+    public Triumvirat() 
+    {
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Overrided methods">
     @Override
     public Chiffrement newChiffrement() 
     {
-        CryptoCaesar chiffrement = new CryptoCaesar();
-        
-        // TODO : configurer avec la clé
-        
-        return chiffrement;
+        return new CryptoCaesar();
     }
+    // </editor-fold>
 }

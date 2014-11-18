@@ -10,16 +10,21 @@ import java.util.Random;
  */
 public class CryptoCaesar implements Chiffrement
 {
+    // <editor-fold defaultstate="collapsed" desc=" Constructeur ">
+    public CryptoCaesar()    
+    {
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc=" Overrided methods ">
     @Override
-    public void init(Cle k) 
+    public void init(Cle k)
     {
         if (!(k instanceof CleCesar))
             throw new IllegalArgumentException("Cle invalide");
         
         CleCesar cle;
         cle = (CleCesar) k;
-
-        // TODO : faire des vérifications, comme voir si le nombre est positif
         
         this.key = cle;
     }
@@ -67,10 +72,14 @@ public class CryptoCaesar implements Chiffrement
     @Override
     public String getProvider() 
     {
-        // TODO
-        return null;
+        return "Triumvirat";
     }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc=" Variables membres ">
     
     // Clé utilisée pour chiffrer et/ou déchiffrer
     private CleCesar key = null;
+    
+    // </editor-fold>
 }

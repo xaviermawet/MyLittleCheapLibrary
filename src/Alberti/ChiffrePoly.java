@@ -10,12 +10,14 @@ import java.util.Random;
  */
 public class ChiffrePoly implements Chiffrement
 {
-
+    // <editor-fold defaultstate="collapsed" desc=" Constructeur ">
     public ChiffrePoly()
     {
         this.ringLen = largeRing.length();
     }
+    // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc=" Overrided methods ">
     @Override
     public void init(Cle k) 
     {
@@ -146,9 +148,11 @@ public class ChiffrePoly implements Chiffrement
     @Override
     public String getProvider() 
     {
-        // TODO
-        return null;
+        return "AlbertiFamily";
     }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc=" Variables membres ">
     
     // Indépendant de la clé
     
@@ -170,4 +174,6 @@ public class ChiffrePoly implements Chiffrement
     
     // Période durant laquelle on crypte avant de tourner le disque
     private int periode;
+    
+    // </editor-fold>
 }

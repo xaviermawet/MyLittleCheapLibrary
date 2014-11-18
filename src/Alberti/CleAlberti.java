@@ -51,7 +51,6 @@ public class CleAlberti implements Cle
     }
     // </editor-fold>    
     
-    
     // <editor-fold defaultstate="collapsed" desc="Overrided methods">
     
     @Override
