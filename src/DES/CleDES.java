@@ -1,0 +1,58 @@
+package DES;
+
+import SPF.Cle;
+import javax.crypto.SecretKey;
+
+/**
+ *
+ * @author Nakim
+ */
+public class CleDES implements Cle
+{
+    // <editor-fold defaultstate="collapsed" desc=" Constructeur ">
+    public CleDES(SecretKey secretKey, int keySize)    
+    {
+        this.secretKey = secretKey;
+        this.keysize = keySize;
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc=" Getters et setters ">
+
+    public SecretKey getSecretKey()
+    {
+        return secretKey;
+    }
+
+    public void setSecretKey(SecretKey secretKey)
+    {
+        this.secretKey = secretKey;
+    }
+
+    public int getKeysize()
+    {
+        return keysize;
+    }
+
+    public void setKeysize(int keysize)
+    {
+        this.keysize = keysize;
+    }
+    
+    
+    
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Overrided methods">
+    @Override
+    public int getLongueur()
+    {
+        return this.keysize;
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc=" Variables membres ">
+    private SecretKey secretKey;
+    private int keysize;
+    // </editor-fold>
+}
