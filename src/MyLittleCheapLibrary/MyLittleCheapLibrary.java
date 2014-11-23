@@ -1,21 +1,14 @@
 package MyLittleCheapLibrary;
 
+import SPF.ByteArrayList;
 import SPF.Chiffrement;
 import SPF.Cle;
 import SPF.CryptoManager;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.SecureRandom;
-import java.util.Base64;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
+import SPF.Integrity;
+import SPF.IntegrityManager;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.util.Date;
 
 /**
  *
@@ -23,9 +16,16 @@ import javax.crypto.SecretKey;
  */
 public class MyLittleCheapLibrary 
 {
-    public static void main(String[] args) 
+    public static void main(String[] args) throws Exception 
     {
+        System.out.println("-------------------------------------------------");
+        System.out.println("|              Service Chiffrement              |");
+        System.out.println("-------------------------------------------------");
+        System.out.println("");
+        
         /* Alberti */
+        System.out.println("---------------------Alberti---------------------");
+        
         Chiffrement chiffrement = CryptoManager.getChiffrement("AlbertiFamily");
         Cle cle = chiffrement.genererCle(5);
         
@@ -37,9 +37,9 @@ public class MyLittleCheapLibrary
         msg = chiffrement.decrypte(msg);
         System.out.println("Message décrypté : " + msg);
         
-        System.out.println("----------------------------------");
-        
         /* Cesar */
+        System.out.println("----------------------Cesar----------------------");
+        
         chiffrement = CryptoManager.getChiffrement("Triumvirat");
         cle = chiffrement.genererCle(3);
         
@@ -51,9 +51,9 @@ public class MyLittleCheapLibrary
         msg = chiffrement.decrypte(msg);
         System.out.println("Message décrypté : " + msg);
         
-        System.out.println("----------------------------------");
-        
         /* DES */
+        System.out.println("-----------------------DES-----------------------");
+        
         chiffrement = CryptoManager.getChiffrement("ProCrypto");
         cle = chiffrement.genererCle(64);
         
@@ -64,5 +64,31 @@ public class MyLittleCheapLibrary
         System.out.println("Message crypté   : " + msg);
         msg = chiffrement.decrypte(msg);
         System.out.println("Message décrypté : " + msg);
+        
+        System.out.println("");
+        System.out.println("-------------------------------------------------");
+        System.out.println("|               Service Integrity               |");
+        System.out.println("-------------------------------------------------");
+        System.out.println("");
+        
+        Integrity integrity = IntegrityManager.getIntegrity("SHA1MawetProvider");
+        msg = "Hello World";
+        byte[] hash = integrity.makeCheck(msg);
+        System.out.println("Hash : " + new String(hash));
+        boolean valid = integrity.verifyCheck(msg, hash);
+        System.out.println("hash valid for " + msg + " : " + valid);
+        
+        ByteArrayList salt = new ByteArrayList();
+        salt.add("RandomString".getBytes());
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        DataOutputStream dos = new DataOutputStream(baos);
+        long time = (new Date()).getTime();
+        dos.writeLong(time);
+        salt.add(baos.toByteArray());
+        
+        hash = integrity.makeCheck(msg, salt);
+        System.out.println("Hash : " + new String(hash));
+        valid = integrity.verifyCheck(msg, salt, hash);
+        System.out.println("hash valid for " + msg + " : " + valid);
     }
 }

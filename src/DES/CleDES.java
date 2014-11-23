@@ -39,8 +39,6 @@ public class CleDES implements Cle
         this.keysize = keysize;
     }
     
-    
-    
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Overrided methods">
