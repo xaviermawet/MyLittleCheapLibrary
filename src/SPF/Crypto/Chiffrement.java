@@ -1,4 +1,6 @@
-package SPF;
+package SPF.Crypto;
+
+import SPF.Cle;
 
 /**
  *

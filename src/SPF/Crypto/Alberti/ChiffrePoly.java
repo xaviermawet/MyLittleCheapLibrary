@@ -1,6 +1,6 @@
-package Alberti;
+package SPF.Crypto.Alberti;
 
-import SPF.Chiffrement;
+import SPF.Crypto.Chiffrement;
 import SPF.Cle;
 import java.util.Random;
 

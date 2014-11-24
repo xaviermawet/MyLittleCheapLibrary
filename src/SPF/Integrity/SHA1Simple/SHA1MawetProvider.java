@@ -1,7 +1,7 @@
-package SHA1Simple;
+package SPF.Integrity.SHA1Simple;
 
-import SPF.Integrity;
-import SPF.IntegrityProvider;
+import SPF.Integrity.Integrity;
+import SPF.Integrity.IntegrityProvider;
 
 /**
  *

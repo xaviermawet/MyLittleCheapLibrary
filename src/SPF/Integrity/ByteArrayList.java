@@ -1,4 +1,4 @@
-package SPF;
+package SPF.Integrity;
 
 import java.util.ArrayList;
 import java.util.List;

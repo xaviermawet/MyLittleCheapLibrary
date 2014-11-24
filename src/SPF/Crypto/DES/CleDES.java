@@ -1,4 +1,4 @@
-package DES;
+package SPF.Crypto.DES;
 
 import SPF.Cle;
 import javax.crypto.SecretKey;

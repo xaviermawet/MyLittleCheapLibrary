@@ -1,6 +1,6 @@
-package Cesar;
+package SPF.Crypto.Cesar;
 
-import SPF.Chiffrement;
+import SPF.Crypto.Chiffrement;
 import SPF.Cle;
 import java.util.Random;
 

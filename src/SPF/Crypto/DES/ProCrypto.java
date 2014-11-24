@@ -1,7 +1,7 @@
-package DES;
+package SPF.Crypto.DES;
 
-import SPF.Chiffrement;
-import SPF.CryptoProvider;
+import SPF.Crypto.Chiffrement;
+import SPF.Crypto.CryptoProvider;
 
 /**
  *

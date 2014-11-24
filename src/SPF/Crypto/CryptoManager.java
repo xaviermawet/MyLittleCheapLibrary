@@ -1,4 +1,4 @@
-package SPF;
+package SPF.Crypto;
 
 import DB.BeanDBAccessMySQL;
 import java.beans.Beans;

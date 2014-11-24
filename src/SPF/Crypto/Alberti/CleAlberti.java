@@ -1,4 +1,4 @@
-package Alberti;
+package SPF.Crypto.Alberti;
 
 import SPF.Cle;
 

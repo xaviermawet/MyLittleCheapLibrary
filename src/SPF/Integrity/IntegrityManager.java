@@ -1,4 +1,4 @@
-package SPF;
+package SPF.Integrity;
 
 import DB.BeanDBAccessMySQL;
 import java.beans.Beans;

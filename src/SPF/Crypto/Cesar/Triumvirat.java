@@ -1,7 +1,7 @@
-package Cesar;
+package SPF.Crypto.Cesar;
 
-import SPF.Chiffrement;
-import SPF.CryptoProvider;
+import SPF.Crypto.Chiffrement;
+import SPF.Crypto.CryptoProvider;
 
 /**
  *

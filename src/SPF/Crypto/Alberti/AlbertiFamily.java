@@ -1,7 +1,7 @@
-package Alberti;
+package SPF.Crypto.Alberti;
 
-import SPF.Chiffrement;
-import SPF.CryptoProvider;
+import SPF.Crypto.Chiffrement;
+import SPF.Crypto.CryptoProvider;
 
 /**
  *

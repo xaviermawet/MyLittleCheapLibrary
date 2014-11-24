@@ -1,11 +1,10 @@
-package SHA1Simple;
+package SPF.Integrity.SHA1Simple;
 
-import SPF.ByteArrayList;
-import SPF.Integrity;
+import SPF.Integrity.ByteArrayList;
+import SPF.Integrity.Integrity;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;

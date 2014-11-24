@@ -1,6 +1,6 @@
-package DES;
+package SPF.Crypto.DES;
 
-import SPF.Chiffrement;
+import SPF.Crypto.Chiffrement;
 import SPF.Cle;
 import java.security.*;
 import java.util.Base64;

@@ -1,11 +1,11 @@
 package MyLittleCheapLibrary;
 
-import SPF.ByteArrayList;
-import SPF.Chiffrement;
+import SPF.Integrity.ByteArrayList;
+import SPF.Crypto.Chiffrement;
 import SPF.Cle;
-import SPF.CryptoManager;
-import SPF.Integrity;
-import SPF.IntegrityManager;
+import SPF.Crypto.CryptoManager;
+import SPF.Integrity.Integrity;
+import SPF.Integrity.IntegrityManager;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.Date;
