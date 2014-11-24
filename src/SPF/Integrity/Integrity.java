@@ -1,5 +1,7 @@
 package SPF.Integrity;
 
+import SPF.ByteArrayList;
+
 /**
  *
  * @author Nakim

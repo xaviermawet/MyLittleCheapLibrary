@@ -1,6 +1,6 @@
 package SPF.Integrity.SHA1Simple;
 
-import SPF.Integrity.ByteArrayList;
+import SPF.ByteArrayList;
 import SPF.Integrity.Integrity;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -54,7 +54,7 @@ public class SHA1Mawet implements Integrity
     {
         this.reset();
         
-        return Arrays.equals(this.messageDigest.digest(
+        return MessageDigest.isEqual(this.messageDigest.digest(
             plainText.getBytes()), digest);
     }
     
@@ -66,7 +66,7 @@ public class SHA1Mawet implements Integrity
         if (salt != null && !salt.isEmpty())
             this.messageDigest.update(salt.getArray());
         
-        return Arrays.equals(this.messageDigest.digest(
+        return MessageDigest.isEqual(this.messageDigest.digest(
             plainText.getBytes()), digest);
     }
 

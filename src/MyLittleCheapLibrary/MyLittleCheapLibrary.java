@@ -1,6 +1,6 @@
 package MyLittleCheapLibrary;
 
-import SPF.Integrity.ByteArrayList;
+import SPF.ByteArrayList;
 import SPF.Crypto.Chiffrement;
 import SPF.Cle;
 import SPF.Crypto.CryptoManager;
