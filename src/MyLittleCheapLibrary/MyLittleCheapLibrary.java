@@ -1,13 +1,10 @@
 package MyLittleCheapLibrary;
 
 import SPF.Authentication.Authentication;
-import SPF.Authentication.AuthenticationManager;
 import SPF.ByteArrayList;
 import SPF.Crypto.Chiffrement;
 import SPF.Cle;
-import SPF.Crypto.CryptoManager;
 import SPF.Integrity.Integrity;
-import SPF.Integrity.IntegrityManager;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.Date;
@@ -28,7 +25,9 @@ public class MyLittleCheapLibrary
         /* Alberti */
         System.out.println("---------------------Alberti---------------------");
         
-        Chiffrement chiffrement = CryptoManager.getChiffrement("AlbertiFamily");
+        //Chiffrement chiffrement = CryptoManager.getChiffrement("AlbertiFamily");
+        //Chiffrement chiffrement = CIAManager2.getChiffrement("AlbertiFamily");
+        Chiffrement chiffrement = CIAManager.getChiffrement("AlbertiFamily");
         Cle cle = chiffrement.genererCle(5);
         
         chiffrement.init(cle);
@@ -42,7 +41,9 @@ public class MyLittleCheapLibrary
         /* Cesar */
         System.out.println("----------------------Cesar----------------------");
         
-        chiffrement = CryptoManager.getChiffrement("Triumvirat");
+        //chiffrement = CryptoManager.getChiffrement("Triumvirat");
+        //chiffrement = CIAManager2.getChiffrement("Triumvirat");
+        chiffrement = CIAManager.getChiffrement("Triumvirat");
         cle = chiffrement.genererCle(3);
         
         chiffrement.init(cle);
@@ -56,7 +57,9 @@ public class MyLittleCheapLibrary
         /* DES */
         System.out.println("-----------------------DES-----------------------");
         
-        chiffrement = CryptoManager.getChiffrement("ProCrypto");
+        //chiffrement = CryptoManager.getChiffrement("ProCrypto");
+        //chiffrement = CIAManager2.getChiffrement("ProCrypto");
+        chiffrement = CIAManager.getChiffrement("ProCrypto");
         cle = chiffrement.genererCle(64);
         
         chiffrement.init(cle);
@@ -74,7 +77,9 @@ public class MyLittleCheapLibrary
         System.out.println("");
         
         // Digest without salt
-        Integrity integrity = IntegrityManager.getIntegrity("SHA1MawetProvider");
+        //Integrity integrity = IntegrityManager.getIntegrity("SHA1MawetProvider");
+        //Integrity integrity = CIAManager2.getIntegrity("SHA1MawetProvider");
+        Integrity integrity = CIAManager.getIntegrity("SHA1MawetProvider");
         msg = "Hello World";
         byte[] hash = integrity.makeCheck(msg);
         System.out.println("Hash : " + new String(hash));
@@ -102,8 +107,9 @@ public class MyLittleCheapLibrary
         System.out.println("-------------------------------------------------");
         System.out.println("");
         
-        Authentication authentication = AuthenticationManager.getAuthentication(
-            "HMACSHA1MawetProvider");
+        //Authentication authentication = AuthenticationManager.getAuthentication("HMACSHA1MawetProvider");
+        //Authentication authentication = CIAManager2.getAuthentication("HMACSHA1MawetProvider");
+        Authentication authentication = CIAManager.getAuthentication("HMACSHA1MawetProvider");
         
         // Key generator
         String secret = "Phrase secrète pour genérer clé";
