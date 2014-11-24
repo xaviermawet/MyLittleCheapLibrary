@@ -37,6 +37,16 @@ public class ByteArrayList
 
         return bytes;
     }
+    
+    public boolean isEmpty()
+    {
+        return this.bytesList.isEmpty();
+    }
+    
+    public void clear()
+    {
+        this.bytesList.clear();
+    }
   
     private List<Byte> bytesList;
 }

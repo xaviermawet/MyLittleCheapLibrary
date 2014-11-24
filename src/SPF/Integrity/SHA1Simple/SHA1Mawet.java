@@ -43,7 +43,8 @@ public class SHA1Mawet implements Integrity
     {
         this.reset();
         
-        this.messageDigest.update(salt.getArray());
+        if (salt != null && !salt.isEmpty())
+            this.messageDigest.update(salt.getArray());
         
         return this.messageDigest.digest(plainText.getBytes());
     }
@@ -62,7 +63,8 @@ public class SHA1Mawet implements Integrity
     {
         this.reset();
         
-        this.messageDigest.update(salt.getArray());
+        if (salt != null && !salt.isEmpty())
+            this.messageDigest.update(salt.getArray());
         
         return Arrays.equals(this.messageDigest.digest(
             plainText.getBytes()), digest);
@@ -71,7 +73,7 @@ public class SHA1Mawet implements Integrity
     @Override
     public String getProvider()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "SHA1MawetProvider";
     }
     
     // <editor-fold defaultstate="collapsed" desc=" Méthodes privées ">
