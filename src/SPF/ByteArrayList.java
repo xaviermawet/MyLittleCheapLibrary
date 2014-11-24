@@ -47,6 +47,11 @@ public class ByteArrayList
     {
         this.bytesList.clear();
     }
+    
+    public int size()
+    {
+        return this.bytesList.size();
+    }
   
     private List<Byte> bytesList;
 }

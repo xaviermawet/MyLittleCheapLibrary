@@ -1,0 +1,56 @@
+package SPF.Authentication;
+
+import SPF.Cle;
+import javax.crypto.SecretKey;
+
+/**
+ *
+ * @author Nakim
+ */
+public class SymmetricKey implements Cle
+{
+    // <editor-fold defaultstate="collapsed" desc=" Constructeur ">
+    public SymmetricKey(SecretKey secretKey, int keySize)
+    {
+        this.secretKey = secretKey;
+        this.keysize   = keySize;
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc=" Getters et setters ">
+
+    public SecretKey getSecretKey()
+    {
+        return secretKey;
+    }
+
+    public void setSecretKey(SecretKey secretKey)
+    {
+        this.secretKey = secretKey;
+    }
+
+    public int getKeysize()
+    {
+        return keysize;
+    }
+
+    public void setKeysize(int keysize)
+    {
+        this.keysize = keysize;
+    }
+    
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Overrided methods">
+    @Override
+    public int getLongueur()
+    {
+        return this.keysize;
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc=" Variables membres ">
+    private SecretKey secretKey = null;
+    private int keysize = -1;
+    // </editor-fold>
+}

@@ -1,4 +1,4 @@
-package SPF.Integrity;
+package SPF.Authentication;
 
 import DB.BeanDBAccessMySQL;
 import java.beans.Beans;
@@ -18,32 +18,32 @@ import java.util.logging.Logger;
 /* Classe non instanciable régissant l'enregistrement 
  * des providers et les accès au service
  */
-public class IntegrityManager
+public class AuthenticationManager
 {
     // <editor-fold defaultstate="collapsed" desc="Constructeur Privé">
     
     // Constructeur privé pour empêcher l'instantiation
-    private IntegrityManager()
+    private AuthenticationManager()
     {
     }
     
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Fonctions statiques">
-    public static Integrity getIntegrity(String providerName)
+    public static Authentication getAuthentication(String providerName)
     {
-        IntegrityProvider provider = providers.get(providerName);
+        AuthenticationProvider provider = providers.get(providerName);
         
         if (provider == null)
             throw new IllegalArgumentException("Provider " + providerName + " not found");
         
-        return provider.newIntegrity();
+        return provider.newAuthentication();
     }
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Variables statiques et initialisation">
     // Association nom du provider - Provider implémenté
-    private static final Map<String, IntegrityProvider> providers;
+    private static final Map<String, AuthenticationProvider> providers;
     
     static
     {
@@ -58,7 +58,7 @@ public class IntegrityManager
             dbaMySQL.init();
             
             // Récupération de toutes les données sur les providers
-            ResultSet rs = dbaMySQL.selectAll("integrity_provider");
+            ResultSet rs = dbaMySQL.selectAll("authentication_provider");
             for (int i = 0; rs.next(); i++)
             {
                 String providerName      = rs.getString("name");
@@ -66,14 +66,14 @@ public class IntegrityManager
                 
                 // Instanciation du provider
                 Class classProvider = Class.forName(providerClassName);
-                IntegrityProvider provider = (IntegrityProvider) classProvider.newInstance();
+                AuthenticationProvider provider = (AuthenticationProvider) classProvider.newInstance();
                 
                 providers.put(providerName, provider);
             }
         }
         catch (IOException | ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException ex)
         {
-            Logger.getLogger(IntegrityManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AuthenticationManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
