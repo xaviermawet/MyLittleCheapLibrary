@@ -47,6 +47,7 @@ public class CryptoCBCAES extends org.bouncycastle.crypto.paddings.PaddedBuffere
 
     public CryptoCBCAES(BlockCipher bc)
     {
+        // Create a buffered block cipher with PKCS7 padding
         super(bc);
         
         this.opmode = -1;

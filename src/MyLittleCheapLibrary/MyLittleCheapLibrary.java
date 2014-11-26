@@ -4,8 +4,6 @@ import SPF.Authentication.Authentication;
 import SPF.ByteArrayList;
 import SPF.Crypto.Chiffrement;
 import SPF.Cle;
-import SPF.Crypto.AES.CryptoCBCAES;
-import SPF.Crypto.AES.CryptoCBCAESProvider;
 import SPF.Integrity.Integrity;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;

@@ -45,7 +45,7 @@ public class SymmetricKey implements Cle
     @Override
     public int getLongueur()
     {
-        return this.keysize;
+        return this.getKeysize();
     }
     // </editor-fold>
     

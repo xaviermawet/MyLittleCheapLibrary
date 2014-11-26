@@ -50,7 +50,7 @@ public class CleDES implements Cle
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc=" Variables membres ">
-    private SecretKey secretKey;
-    private int keysize;
+    private SecretKey secretKey = null;
+    private int keysize = -1;
     // </editor-fold>
 }
