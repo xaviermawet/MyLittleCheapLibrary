@@ -4,6 +4,8 @@ import SPF.Authentication.Authentication;
 import SPF.ByteArrayList;
 import SPF.Crypto.Chiffrement;
 import SPF.Cle;
+import SPF.Crypto.AES.CryptoCBCAES;
+import SPF.Crypto.AES.CryptoCBCAESProvider;
 import SPF.Integrity.Integrity;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -64,6 +66,20 @@ public class MyLittleCheapLibrary
         
         chiffrement.init(cle);
         msg = "Hello World";
+        System.out.println("Message clair    : " + msg);
+        msg = chiffrement.crypte(msg);
+        System.out.println("Message crypté   : " + msg);
+        msg = chiffrement.decrypte(msg);
+        System.out.println("Message décrypté : " + msg);
+        
+        /* AES */
+        System.out.println("-----------------------AES-----------------------");
+        
+        chiffrement = CIAManager.getChiffrement("CryptoCBCAESProvider");
+        cle = chiffrement.genererCle(128);
+        
+        chiffrement.init(cle);
+        msg = "Hello World Hello World Hello World";
         System.out.println("Message clair    : " + msg);
         msg = chiffrement.crypte(msg);
         System.out.println("Message crypté   : " + msg);

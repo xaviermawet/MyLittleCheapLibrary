@@ -31,6 +31,7 @@ public class CryptoDES implements Chiffrement
         }
         finally
         {
+            this.key    = null;
             this.opmode = -1;
         }
     }
@@ -41,20 +42,20 @@ public class CryptoDES implements Chiffrement
     public void init(Cle k)
     {
         if (!(k instanceof CleDES))
-            throw new IllegalArgumentException("Cle invalide");
+            throw new IllegalArgumentException("Invalid key. CleDES expected");
         
         if(this.cipher == null)
-            throw new NullPointerException("No cipher object available");
+            throw new NullPointerException("No cipher object available"); 
         
-        CleDES DESKey;
-        DESKey = (CleDES) k;
-        
-        this.key = DESKey;
+        this.key = (CleDES) k;
     }
 
     @Override
     public Cle genererCle(int longueur)
     {
+        if (longueur < 0)
+            throw new IllegalArgumentException("Invalid key size");
+        
         try
         {
             // Get key generator
