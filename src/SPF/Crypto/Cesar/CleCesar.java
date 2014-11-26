@@ -54,4 +54,10 @@ public class CleCesar implements Cle
     private int decalage;
     
     // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc=" Varibles statiques ">
+    
+    private static final long serialVersionUID = 1L;
+    
+    // </editor-fold>
 }

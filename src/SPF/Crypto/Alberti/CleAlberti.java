@@ -82,4 +82,10 @@ public class CleAlberti implements Cle
     private int periodLength;
     
     // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc=" Varibles statiques ">
+    
+    private static final long serialVersionUID = 1L;
+    
+    // </editor-fold>
 }

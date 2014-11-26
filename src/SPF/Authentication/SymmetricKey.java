@@ -53,4 +53,10 @@ public class SymmetricKey implements Cle
     private SecretKey secretKey = null;
     private int keysize = -1;
     // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc=" Varibles statiques ">
+    
+    private static final long serialVersionUID = 1L;
+    
+    // </editor-fold>
 }

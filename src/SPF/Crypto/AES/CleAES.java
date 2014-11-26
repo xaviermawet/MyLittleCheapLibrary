@@ -80,5 +80,7 @@ public class CleAES implements Cle
     // The default block size
     public static int blockSize = 16;
     
+    private static final long serialVersionUID = 1L;
+    
     // </editor-fold>
 }
